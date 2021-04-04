@@ -12,8 +12,8 @@ require('dotenv').config()
 
 const needle = require('needle');
 
-const userId = 2244994945;
-const url = `https://api.twitter.com/2/users/${userId}/mentions`;
+// const userId = 2244994945;
+const url = `https://api.twitter.com/2/users/${process.env.MY_USER_ID}/mentions`;
 
 // get the bearer token for authentication so that I can make requests to the Twitter API
 const bearerToken = process.env.BEARER_TOKEN;
@@ -57,7 +57,7 @@ const getUserMentions = async () => {
         depth: null
     });
 
-    console.log(`Got ${userMentions.length} mentions for user ID ${userId}!`);
+    console.log(`Got ${userMentions.length} mentions for user ID ${process.env.MY_USER_ID}!`);
 
 }
 
@@ -78,8 +78,11 @@ const getPage = async (params, options, nextToken) => {
         throw new Error(`Request failed: ${err}`);
     }
 }
-getUserMentions()
-// let answer = getUserMentions();
+
+// activate this function every hour
+setTimeout(
+    getUserMentions, 3600000
+);
 
 
 
