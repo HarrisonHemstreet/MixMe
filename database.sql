@@ -1,0 +1,7 @@
+CREATE DATABASE mixme;
+
+CREATE TABLE tweets(
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    tweet_id VARCHAR(99) NOT NULL,
+    tweet_text VARCHAR(300) NOT NULL,
+);
