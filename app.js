@@ -7,62 +7,7 @@
 
 const express = require('express');
 const app = express();
-// const cors = require('cors');
-// const { Pool, Client } = require("pg");
-// const axios = require('axios');
-// const Twitter = require('twitter');
-
-// require("dotenv/config");
-// const twit = require("./twit");
-
-
-// const apikey = process.env.CONSUMER_KEY;
-// const apiSecret = process.env.COMSUMER_SECRET;
-// const accessToken = process.env.ACCESS_TOKEN;
-// const accessTokenSecret = process.env.TOKEN_SECRET;
-
-// const client = new Twitter({
-//     consumer_key: apikey,
-//     consumer_secret: apiSecret,
-//     access_token_key: accessToken,
-//     access_token_secret: accessTokenSecret,
-// });
-
-// let params = {screen_name: 'MixMe'};
-// client.get('statuses/user_timeline')
-
-
-
-// // const pool = require('./db')
-
-
-
-// const pool = new Pool({
-//     user: "hhemstreet",
-//     password: "password",
-//     host: "localhost",
-//     port: "5432",
-//     database: "mixme"
-// });
-
-// const baseTURLMentionUserName = "https://api.twitter.com/2";
-
-// setTimeout(
-//     axios.get('https://api.twitter.com/2/users/by/username/?twitterUsername')
-// )
-
-
-
-// // MIDDLEWARE
-// app.use(cors());
-// app.use(express.json());
-
-// ROUTES
-
-// listens via setTimeout() for new mentions
-
-
-// 
+require('dotenv').config()
 
 
 const needle = require('needle');
@@ -70,18 +15,16 @@ const needle = require('needle');
 const userId = 2244994945;
 const url = `https://api.twitter.com/2/users/${userId}/mentions`;
 
-// The code below sets the bearer token from your environment variables
-// To set environment variables on macOS or Linux, run the export command below from the terminal:
-// export BEARER_TOKEN='YOUR-TOKEN'
-// const bearerToken = process.env.BEARER_TOKEN;
-const bearerToken = "AAAAAAAAAAAAAAAAAAAAAIMWOQEAAAAApMYV0lo6DqGj2YvZ1OekSgWBE00%3DxsL9RJXtVawT4XsEKS1J6izjYY8RjuZcn9e8uUhGJyVWf2oaH8";
-// this is the ID for @TwitterDev
+// get the bearer token for authentication so that I can make requests to the Twitter API
+const bearerToken = process.env.BEARER_TOKEN;
+
+
 let userMentions = [];
 const getUserMentions = async () => {
     
     let params = {
         "max_results": 100,
-        "tweet.fields": "created_at"
+        // "tweet.fields": "created_at"
     }
 
     const options = {
@@ -145,5 +88,5 @@ getUserMentions()
 
 
 app.listen(5000, () => {
-    console.log(`Server has started on port 5000! And the answer is: ${userMentions}`);
+    console.log(`Server has started on port 5000! And the answer is: ${bearerToken}`);
 });
